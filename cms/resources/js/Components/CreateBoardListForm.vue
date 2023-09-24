@@ -1,6 +1,5 @@
 <script setup>
 import { useForm } from "@inertiajs/vue3";
-//import route from "vendor/tightenco/ziggy/src/js";
 import {nextTick, ref} from "vue";
 
 const props = defineProps({

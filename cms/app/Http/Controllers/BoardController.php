@@ -16,8 +16,10 @@ class BoardController extends Controller
     }
 
 
-    public function show(){
-        return Inertia::render('Board');
+    public function show(Board $board){
+        return Inertia::render('Board',[
+            'board' => $board
+        ]);
     }
 
     public function update(Board $board){
