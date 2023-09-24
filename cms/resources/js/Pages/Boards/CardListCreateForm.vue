@@ -11,6 +11,7 @@ const props = defineProps({
 
 const isShowingForm = ref(false);
 const inputNameRef = ref();
+const formRef = ref();
 const form = useForm({
   name:''
 });
@@ -22,7 +23,14 @@ async function showForm() {
 }
 
 function onSubmit() {
-  form.post(route('boardLists.store', {board: props.board.id}));
+  form.post(route('cardLists.store', {board: props.board.id}),{
+    onSuccess: () => {
+      form.reset();
+      inputNameRef.value.focus();
+      formRef.value.scrollIntoView();
+    }
+  });
+
 }
 
 </script>
@@ -30,6 +38,7 @@ function onSubmit() {
 
 <template>
   <form
+    ref="formRef"
     v-if = "isShowingForm"
     @submit.prevent="onSubmit"
     class="p-3 bg-gray-200 rounded-md"

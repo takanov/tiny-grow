@@ -3,10 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Models\Board;
-use App\Models\BoardList;
-use Illuminate\Http\Request;
+use App\Models\CardList;
 
-class BoardListController extends Controller
+class CardListController extends Controller
 {
     public function store(Board $board)
     {
@@ -14,7 +13,7 @@ class BoardListController extends Controller
             'name' => ['required']
         ]);
 
-        BoardList::create([
+        CardList::create([
             'board_id' => $board->id,
             'user_id' => auth()->id(),
             'name' => request('name')
