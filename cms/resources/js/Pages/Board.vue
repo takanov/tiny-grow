@@ -3,8 +3,10 @@
 import {Menu, MenuButton, MenuItem, MenuItems} from '@headlessui/vue';
 import AuthenticatedLayouts from '@/Layouts/AuthenticatedLayout.vue';
 import BoardNameForm from '@/Components/BoardNameForm.vue';
-import { formToJSON } from 'axios';
+//import { formToJSON } from 'axios';
 import { nextTick } from 'vue';
+import CreateBoardListForm from '@/Components/CreateBoardListForm.vue';
+
 const props = defineProps({
   board: {
     type: Object,
@@ -16,7 +18,7 @@ const props = defineProps({
 <template>
   <AuthenticatedLayouts>
     <div class="flex flex-col h-full bg-blue-600">
-      <div class="flex items-center justify-between p-4 shrink-0">
+      <div class="flex flex-wrap items-center justify-between p-4 shrink-0">
         <BoardNameForm :board="board"/>
         <div>
           <button class="inline-flex items-center px-3 py-2 text-sm font-medium text-white rounded-md bg-white/10 hover:bg-white/20">
@@ -30,7 +32,7 @@ const props = defineProps({
       <div class="flex-1 overflow-x-auto">
         <div class="inline-flex items-start h-full px-4 pb-4 space-x-4">
           <div
-            v-for="item in Array.from({length:3})"
+            v-for="item in Array.from({length:0})"
             class="flex flex-col max-h-full bg-gray-200 rounded-md w-72">
             <div class="flex items-center justify-between px-3 py-2">
               <h3 class="text-sm font-semibold text-gray-700">Backlog</h3>
@@ -65,7 +67,7 @@ const props = defineProps({
               <div class="flex-1 px-3 overflow-y-auto">
                 <ul class="space-y-3">
                   <li
-                    v-for="item in Array.from({length: 7})"
+                    v-for="item in Array.from({length: 0})"
                     class="relative p-3 bg-white border-b border-gray-300 rounded-md shadow group hover:bg-gray-50">
                     <a href="#" class="text-sm">card item</a>
                     <button class="absolute hidden w-8 h-8 m-1 text-gray-600 rounded-md top-1 right-1 bg-gray-50 group-hover:grid place-content-center hover:text-black hover:bg-gray-200">
@@ -96,12 +98,9 @@ const props = defineProps({
             </div>
           </div>
           <div class="w-72">
-            <button class="flex items-center w-full p-2 text-sm font-medium text-white rounded-md bg-white/10 hover:bg-white/20">
-              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-5 h-5">
-                <path fill-rule="evenodd" d="M12 3.75a.75.75 0 01.75.75v6.75h6.75a.75.75 0 010 1.5h-6.75v6.75a.75.75 0 01-1.5 0v-6.75H4.5a.75.75 0 010-1.5h6.75V4.5a.75.75 0 01.75-.75z" clip-rule="evenodd" />
-              </svg>
-              <span class="ml-1">Add another list</span>
-            </button>
+           <CreateBoardListForm :board="board">
+
+           </CreateBoardListForm>
           </div>
         </div>
       </div>

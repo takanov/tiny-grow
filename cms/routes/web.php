@@ -1,5 +1,5 @@
 <?php
-
+use App\Http\Controllers\BoardController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
@@ -8,8 +8,13 @@ use Inertia\Inertia;
 //ユーザーが /boards URL にアクセスすると、BoardController::class で定義されている show() メソッドが実行されます
 
 Route::group(['middleware' => ['auth', 'verified']], function () {
-    Route::get('/board',[\App\Http\Controllers\BoardController::class, 'show'])->name('boards.show');
-    Route::get('/boards', [\App\Http\Controllers\BoardController::class,'index'])->name('boards');
+    Route::get('/boards/{board}',[BoardController::class, 'show'])->name('boards.show');
+    Route::put('/boards/{board}',[BoardController::class, 'update'])->name('boards.update');
+    Route::get('/boards', [BoardController::class,'index'])->name('boards');
+    Route::post('/boards', [BoardController::class,'store'])->name('boards.store');
+
+    Route::post('/boards/{board}/lists', [\App\Http\Controllers\BoardListController::class,'store'])->name('boardLists.store');
+
 });
 
 Route::get('/', function () {

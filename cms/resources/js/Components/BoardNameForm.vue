@@ -41,26 +41,26 @@ function onSubmit() {
 </script>
 
 <template>
-  <div class="flex flex-col items-start ">
+  <div class="flex flex-col items-start max-w-full ">
     <h1
       @click="edit()"
       :class="[isEditing ? 'absolute -left-[1000rem]': '']"
       ref="heading"
-      class="px-3 text-2xl font-bold text-white hover:bg-white/20 py-1.5 rounded-md cursor-pointer border border-transparent">
-      {{ form.name }}
+      class="px-3 text-2xl font-bold text-white hover:bg-white/20 py-1.5 rounded-md cursor-pointer border border-transparent whitespace-pre-wrap break-all">
+      {{ form.name ? form.name: '' }}
     </h1>
     <form
       v-show="isEditing"
       @submit.prevent="onSubmit"
       @focusout="onSubmit"
-      action=""
+      class="w-full"
     >
       <input
         ref="input"
         v-model="form.name"
         type="text"
         placeholder="Board name"
-        class="hover:bg-white/20 whitespace-pre-wrap break-all border border-transparent rounded-md cursor-pointer px-3 py-1.5 text-2xl text-black font-bold"
+        class="hover:bg-white/20 whitespace-pre-wrap max-w-full break-all border border-transparent rounded-md cursor-pointer px-3 py-1.5 text-2xl text-black font-bold"
       >
     </form>
   </div>
