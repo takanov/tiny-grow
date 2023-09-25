@@ -5,6 +5,7 @@ use Illuminate\Foundation\Application;
 use App\Http\Controllers\BoardController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\CardListController;
+use App\Http\Controllers\CardController;
 
 //ユーザーが /boards URL にアクセスすると、BoardController::class で定義されている show() メソッドが実行されます
 
@@ -15,7 +16,8 @@ Route::group(['middleware' => ['auth', 'verified']], function() {
     Route::post('/boards', [BoardController::class, 'store'])->name('boards.store');
 
     Route::post('/boards/{board}/lists', [CardListController::class,'store'])->name('cardLists.store');
-
+    Route::post('/cards', [CardController::class, 'store'])->name('cards.store');
+    Route::put('/cards/{card}', [CardController::class, 'update'])->name('cards.update');
 });
 
 Route::get('/', function () {

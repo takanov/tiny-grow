@@ -1,5 +1,4 @@
 <script setup>
-//import { DotsHorizontalIcon } from '@vue-hero-icons/solid'
 import {Menu, MenuButton, MenuItem, MenuItems} from '@headlessui/vue';
 import AuthenticatedLayouts from '@/Layouts/AuthenticatedLayout.vue';
 import BoardNameForm from '@/Pages/Boards/BoardNameForm.vue';
