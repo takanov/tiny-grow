@@ -21,4 +21,14 @@ class CardListController extends Controller
 
         return redirect()->back();
     }
+
+    public function destroy(CardList $cardList)
+    {
+        // 確認: 現在のユーザーがこのカードリストを削除する権限があるか
+        //$this->authorize('delete', $cardList);
+
+        // カードリストを削除する
+        $cardList->delete();
+        return redirect()->back();
+    }
 }

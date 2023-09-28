@@ -7,11 +7,11 @@ import CardListItem from "@/Pages/Boards/CardListItem.vue";
 import Draggable from 'vuedraggable';
 import {Inertia} from "@inertiajs/inertia";
 
-
 const props = defineProps({
-  list: Object
+  list: Object,
+  boardId: Number  // boardIdをpropsから受け取る
 });
-
+console.log(props.board);
 const listRef = ref();
 const cards = ref(props.list.cards);
 
@@ -48,6 +48,14 @@ function onChange(e) {
   });
 }
 
+function deleteCard(cardListId) {
+    const boardId = props.boardId;
+    console.log(boardId);  // ここでboardIdをログ出力
+    if (confirm('このカードを削除してもよろしいですか？')) {
+        Inertia.delete(route('cardLists.destroy', {board: boardId, cardList: cardListId}));
+    }
+}
+
 
 </script>
 
@@ -75,11 +83,17 @@ function onChange(e) {
           leave-to-class="scale-90 opacity-0"
           >
           <MenuItems class="absolute left-0 w-40 mt-2 overflow-hidden origin-top-left bg-white border rounded-md shadow-lg focus:outline-none">
-            <MenuItem v-slot="{active}">
+            <!-- <MenuItem v-slot="{active}">
               <a href="#" :class="{'bg-gray-100': active}" class="block px-4 py-2 text-sm text-gray-700">カードの作成</a>
-            </MenuItem>
+            </MenuItem>-->
             <MenuItem v-slot="{active}">
-              <a href="#" :class="{'bg-gray-100': active}" class="block px-4 py-2 text-sm text-red-600">カードの削除</a>
+              <a
+              href="#"
+              :class="{'bg-gray-100': active}"
+              class="block px-4 py-2 text-sm text-red-600"
+              @click.prevent="deleteCard(list.id)"
+              >
+              カードの削除</a>
             </MenuItem>
           </MenuItems>
         </transition>

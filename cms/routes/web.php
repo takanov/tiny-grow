@@ -19,6 +19,7 @@ Route::group(['middleware' => ['auth', 'verified']], function() {
     Route::post('/cards', [CardController::class, 'store'])->name('cards.store');
     Route::put('/cards/{card}', [CardController::class, 'update'])->name('cards.update');
     Route::put('/cards/{card}/move', [CardController::class, 'move'])->name('cards.move');
+    Route::delete('/card-lists/{cardList}', [CardListController::class, 'destroy'])->name('cardLists.destroy');
 });
 
 Route::get('/', function () {
