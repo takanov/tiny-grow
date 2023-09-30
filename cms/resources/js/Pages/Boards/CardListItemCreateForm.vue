@@ -9,6 +9,7 @@ const props = defineProps({
     default: () => ({})
   }
 });
+
 const emit = defineEmits(['created']);
 const inputTitleRef = ref();
 const isShowingForm = computed(() => props.list.id === store.value.listCreatingCardId);
@@ -24,6 +25,26 @@ async function showForm() {
   inputTitleRef.value.focus();
 }
 
+
+
+let recognition; //音声認識のインスタンスを管理するために、外部の変数を作成
+function startSpeechRecognition() {
+  recognition = new window.webkitSpeechRecognition();//関数で、音声認識のインスタンスを初期化
+  recognition.lang = 'ja-JP'; // 言語を日本語に設定
+  recognition.interimResults = true;
+  recognition.continuous = true;
+
+  recognition.onresult = (event) => {
+    for (let i = event.resultIndex; i < event.results.length; ++i) {
+      if (event.results[i].isFinal) {
+        form.title += event.results[i][0].transcript; // form.titleを更新
+      }
+    }
+  };
+
+  recognition.start();
+}
+
 function onSubmit() {
   form.post(route('cards.store'), {
     onSuccess: () => {
@@ -34,6 +55,26 @@ function onSubmit() {
   });
 
 }
+// ボタンのテキストを管理するrefを作成します。
+const buttonText = ref('きもちをはなす');
+
+// ボタンがクリックされたときに呼ばれる関数です。
+function handleButtonClick() {
+  if (buttonText.value === 'きもちをはなす') {
+    buttonText.value = 'きもちをとどける';
+    startSpeechRecognition();
+  } else {
+    buttonText.value = 'きもちをはなす';
+    if (recognition) {
+      recognition.stop();
+    }
+    // フォームの送信
+    onSubmit();
+  }
+}
+
+
+
 
 </script>
 
@@ -57,7 +98,10 @@ function onSubmit() {
     <div class="mt-2 space-x-2">
       <button
         type="submit"
-        class="px-4 py-2 text-sm font-medium text-white rounded-md shadow-sm bg-rose-600 hover:bg-rose-500 focus:ring-2 focus:ring-offset-2 focus:ring-rose-500 focus:outline-none">Add card</button>
+        @click="handleButtonClick"
+        class="px-4 py-2 text-sm font-medium text-white rounded-md shadow-sm bg-rose-600 hover:bg-rose-500 focus:ring-2 focus:ring-offset-2 focus:ring-rose-500 focus:outline-none">
+        {{ buttonText }}
+      </button>
       <button
         type="button"
         @click="store.listCreatingCardId = null"

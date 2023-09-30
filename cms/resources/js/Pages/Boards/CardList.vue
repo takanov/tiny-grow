@@ -11,7 +11,7 @@ const props = defineProps({
   list: Object,
   boardId: Number  // boardIdをpropsから受け取る
 });
-console.log(props.board);
+
 const listRef = ref();
 const cards = ref(props.list.cards);
 
