@@ -10,6 +10,16 @@ class Card extends Model
 {
     use HasFactory;
     protected $guarded = [];
+    protected $fillable = [
+        'board_id',
+        'card_list_id',
+        'user_id',
+        'title',
+        //'name',
+        'description',
+    ];
+
+
     const POSITION_GAP = 60000;
     const POSITION_MIN = 0.00002;
 
@@ -33,5 +43,9 @@ class Card extends Model
                 );
             }
         });
+    }
+    public function cardList()
+    {
+      return $this->belongsTo(CardList::class);
     }
 }
