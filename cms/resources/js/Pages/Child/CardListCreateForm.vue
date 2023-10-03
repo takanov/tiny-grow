@@ -41,28 +41,28 @@ function onSubmit() {
       ref="inputNameRef"
       v-model="form.name"
       class="block w-full text-sm border-gray-300 rounded-md shadow-sm focus:border-blue-400 focus:ring-blue-400"
-      placeholder="リスト名をつけてください"
+      placeholder="Enter list name..."
       type="text"
     >
 
     <div class="mt-2 space-x-2">
       <button
-        class="px-4 py-2 text-sm font-bold text-white bg-blue-600 rounded-md shadow-sm hover:bg-blue-500 focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 focus:outline-none"
+        class="px-4 py-2 text-sm font-medium text-white rounded-md shadow-sm bg-rose-600 hover:bg-rose-500 focus:ring-2 focus:ring-offset-2 focus:ring-rose-500 focus:outline-none"
         type="submit"
-      >リストを追加
+      >Add list
       </button>
       <button
-        class="px-4 py-2 text-sm font-medium text-gray-700 rounded-md hover:text-black focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 focus:outline-none"
+        class="px-4 py-2 text-sm font-medium text-gray-700 rounded-md hover:text-black focus:ring-2 focus:ring-offset-2 focus:ring-rose-500 focus:outline-none"
         type="button"
         @click="isShowingForm = false"
-      >やめる
+      >Cancel
       </button>
     </div>
   </form>
 
   <button
     v-if="!isShowingForm"
-    class="flex items-center w-full p-2 text-sm font-bold text-white rounded-md bg-white/10 hover:bg-white/20"
+    class="flex items-center w-full p-2 text-sm font-medium text-white rounded-md bg-white/10 hover:bg-white/20"
     @click="showForm()"
   >
     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-5 h-5">

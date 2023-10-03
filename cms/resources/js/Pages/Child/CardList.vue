@@ -93,7 +93,7 @@ function deleteCard(cardListId) {
               class="block px-4 py-2 text-sm text-red-600"
               @click.prevent="deleteCard(list.id)"
               >
-              リストの削除</a>
+              カードの削除</a>
             </MenuItem>
           </MenuItems>
         </transition>
@@ -116,14 +116,13 @@ function deleteCard(cardListId) {
           </template>
         </Draggable>
       </div>
-      <!--
+
       <div class="px-3 mt-3">
         <CardListItemCreateForm
           :list="list"
           @created="onCardCreated()"
           />
       </div>
-      -->
     </div>
   </div>
 </template>

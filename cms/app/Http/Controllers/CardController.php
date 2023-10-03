@@ -7,8 +7,9 @@ use App\Models\Card;
 
 class CardController extends Controller
 {
-    public function store()
+    public function store(Request $request)
     {
+        logger($request);
         request()->validate([
             'board_id' => ['required', 'exists:boards,id'],
             'card_list_id' => ['required', 'exists:card_lists,id'],
@@ -22,7 +23,7 @@ class CardController extends Controller
             'user_id' => auth()->id()
         ]);
 
-        return redirect()->back();
+        return redirect()->back()->with('success', 'Card created successfully.');
     }
 
     public function update(Card $card)
